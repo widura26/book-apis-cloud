@@ -1,4 +1,1 @@
-# .gitignore
-
-# Ignore file JSON konfigurasi
-keyfile.json
+samples/keyfile.json
