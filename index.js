@@ -16,5 +16,5 @@ app.get('/hello-word', (req, res) => {
 })
 
 app.listen(6000, () => {
-    console.log('server turn on');
+    console.log(`Server connected on http://localhost:6000`);
 })
