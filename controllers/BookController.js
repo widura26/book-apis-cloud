@@ -30,6 +30,7 @@ class BookController {
                 title: title,
                 author: author
             });
+
             const savedUser = await book.save();
             res.status(200).json({
                 message: 'Data berhasil ditambahkan',

@@ -20,6 +20,7 @@ app.use([
 app.get('/hello-word', (req, res) => {
     res.send('hello word');
 })
+
 app.listen(6000, () => {
     console.log('server turn on');
 })
