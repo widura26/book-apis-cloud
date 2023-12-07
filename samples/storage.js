@@ -8,16 +8,16 @@ const storage = new Storage({
     keyFilename: './storage.json'
 });
 
-const transfer = new TransferManager(storage.bucket(bucketName))
-
 const uploadFile = async () => {
-    await transfer.uploadFileInChunks(file, {
-        chunkSizeBytes: 32 * 1024 * 1024
-    });
-    console.log(`${file} uploaded to ${bucketName}`);
+    try {
+        await storage.bucket(bucketName).upload(file);
+        console.log(`${file} uploaded to ${bucketName}`);
+    } catch (error) {
+        console.log(error);
+    }
 }
 
-uploadFile().catch(console.error)
+uploadFile()
 
 
 
