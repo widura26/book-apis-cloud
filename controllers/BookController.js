@@ -1,6 +1,7 @@
 import Book from '../models/Book.js'
 import crypto from 'crypto';
 import firestore from '../samples/firestoreClient.js';
+import { Storage } from '@google-cloud/storage';
 
 class BookController {
     getBooks = async (req, res) => {
@@ -11,6 +12,18 @@ class BookController {
         res.status(200).json({
             data: bookList
         })
+    }
+
+    uploadFile = async (file) => {
+        const bucketName = 'book-apis-bucket'
+        const storage = new Storage({
+            keyFilename: '../samples/storage.json'
+        })
+        try {
+            await storage.bucket(bucketName).upload(file)
+        } catch (error) {
+            console.log(error);
+        }
     }
     
     createBook = async (req, res) => {
@@ -23,6 +36,9 @@ class BookController {
                 author: author,
                 file: req.files
             })
+
+            const file = addBook.file;
+            this.uploadFile(file[0].path);
             res.status(200).json({
                 message: 'Data berhasil ditambahkan',
                 data: addBook
