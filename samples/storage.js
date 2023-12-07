@@ -10,14 +10,14 @@ const storage = new Storage({
 
 const transfer = new TransferManager(storage.bucket(bucketName))
 
-uploadFileInChunksWithTransferManager = async () => {
+const uploadFile = async () => {
     await transfer.uploadFileInChunks(file, {
         chunkSizeBytes: 32 * 1024 * 1024
     });
     console.log(`${file} uploaded to ${bucketName}`);
 }
 
-uploadFileInChunksWithTransferManager().catch(console.error)
+uploadFile().catch(console.error)
 
 
 
