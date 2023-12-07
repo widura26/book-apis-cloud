@@ -14,14 +14,14 @@ class BookController {
     }
     
     createBook = async (req, res) => {
-        const { title, author, file } = req.body;
+        const { title, author } = req.body;
         const id = crypto.randomBytes(14).toString('hex')
         try {
             const book = firestore.doc(`/books/${id}`);
             const addBook = await book.set({
                 title: title,
                 author: author,
-                file: file
+                file: req.files
             })
             res.status(200).json({
                 message: 'Data berhasil ditambahkan',
