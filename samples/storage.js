@@ -1,6 +1,6 @@
 import { Storage, TransferManager } from '@google-cloud/storage'
 //bucketname
-const bucketName = 'book-apis-cloud'
+const bucketName = 'book-apis-bucket'
 
 const file = './example.pdf'
 //Google Service account key
