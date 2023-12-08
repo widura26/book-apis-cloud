@@ -28,7 +28,7 @@ class BookController {
     
     createBook = async (req, res) => {
         const { title, author } = req.body;
-        const file = req.file;
+        const file = req.file.originalname;
         await this.uploadFile(file);
         const id = crypto.randomBytes(14).toString('hex')
         try {
@@ -36,7 +36,7 @@ class BookController {
             const addBook = await book.set({
                 title: title,
                 author: author,
-                file: file.originalname
+                file: file
             })
 
             res.status(200).json({
