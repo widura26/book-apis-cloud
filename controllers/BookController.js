@@ -31,7 +31,7 @@ class BookController {
         const { title, author } = req.body;
         const file = req.file;
 
-        const destFileName = `https://storage.googleapis.com/book-apis-bucket/${file}`;
+        const destFileName = file.originalname;
         await this.uploadFile(destFileName);
 
         const id = crypto.randomBytes(14).toString('hex')
