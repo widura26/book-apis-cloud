@@ -21,7 +21,9 @@ class BookController {
         })
 
         try {
-            await storage.bucket(bucketName).upload(file);
+            await storage.bucket(bucketName).upload(file, {
+                destination: `books/${file.originalname}`
+            });
         } catch (error) {
             console.log(error);
         }
