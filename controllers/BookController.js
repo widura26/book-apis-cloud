@@ -20,11 +20,8 @@ class BookController {
             keyFilename: '../samples/storage.json'
         })
 
-        const dest = 'waduh'
         try {
-            await storage.bucket(bucketName).upload(file, {
-                destination: dest,
-            });
+            await storage.bucket(bucketName).upload(file);
         } catch (error) {
             console.log(error);
         }
@@ -34,7 +31,7 @@ class BookController {
         const { title, author } = req.body;
         const file = req.file;
 
-        const destFileName = file;
+        const destFileName = `https://storage.googleapis.com/book-apis-bucket/${file}`;
         await this.uploadFile(destFileName);
 
         const id = crypto.randomBytes(14).toString('hex')
