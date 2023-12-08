@@ -14,14 +14,14 @@ class BookController {
         })
     }
 
-    uploadFile = async (file) => {
+    uploadFile = async (destFileName) => {
         const bucketName = 'book-apis-bucket'
         const storage = new Storage({
             keyFilename: '../samples/storage.json'
         })
 
         try {
-            await storage.bucket(bucketName).upload(file);
+            await storage.bucket(bucketName).upload(destFileName);
         } catch (error) {
             console.log(error);
         }
@@ -31,7 +31,7 @@ class BookController {
         const { title, author } = req.body;
         const file = req.file;
 
-        const destFileName = `https://storage.googleapis.com/book-apis-bucket/${file.originalname}`;
+        const destFileName = file.originalname;
         await this.uploadFile(destFileName);
 
         const id = crypto.randomBytes(14).toString('hex')
@@ -40,7 +40,7 @@ class BookController {
             const addBook = await book.set({
                 title: title,
                 author: author,
-                file: file.originalname
+                file: `https://storage.googleapis.com/book-apis-bucket/${file.originalname}`
             })
 
             res.status(200).json({
