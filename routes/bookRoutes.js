@@ -6,5 +6,5 @@ const upload = multer();
 router.get('/allbooks', new BookController().getBooks);
 // router.get('/book/:id', new BookController());
 router.post('/books', upload.single('file'), new BookController().createBook);
-
+// 'file' yang terdapat di dalam function single itu nama fieldnya
 export default router;
