@@ -21,9 +21,7 @@ class BookController {
         })
 
         try {
-            await storage.bucket(bucketName).upload(file, {
-                destination: `books/${file.originalname}`
-            })
+            await storage.bucket(bucketName).upload(file);
         } catch (error) {
             console.log(error);
         }
@@ -31,8 +29,10 @@ class BookController {
     
     createBook = async (req, res) => {
         const { title, author } = req.body;
-        const file = req.file.originalname;
-        await this.uploadFile(`uploads/${file}`);
+        const file = req.file;
+
+        const destFileName = file;
+        await this.uploadFile(destFileName);
 
         const id = crypto.randomBytes(14).toString('hex')
         try {
@@ -40,7 +40,7 @@ class BookController {
             const addBook = await book.set({
                 title: title,
                 author: author,
-                file: file
+                file: file.originalname
             })
 
             res.status(200).json({
