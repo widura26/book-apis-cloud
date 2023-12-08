@@ -19,8 +19,11 @@ class BookController {
         const storage = new Storage({
             keyFilename: '../samples/storage.json'
         })
+
         try {
-            await storage.bucket(bucketName).upload(file)
+            await storage.bucket(bucketName).upload(file, {
+                destination: `books/${file.originalname}`
+            })
         } catch (error) {
             console.log(error);
         }
@@ -30,6 +33,7 @@ class BookController {
         const { title, author } = req.body;
         const file = req.file.originalname;
         await this.uploadFile(`uploads/${file}`);
+
         const id = crypto.randomBytes(14).toString('hex')
         try {
             const book = firestore.doc(`/books/${id}`);
