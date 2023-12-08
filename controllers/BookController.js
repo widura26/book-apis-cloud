@@ -20,9 +20,10 @@ class BookController {
             keyFilename: '../samples/storage.json'
         })
 
+        const dest = 'waduh'
         try {
             await storage.bucket(bucketName).upload(file, {
-                destination: `books/${file.originalname}`
+                destination: dest,
             });
         } catch (error) {
             console.log(error);
