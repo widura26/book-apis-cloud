@@ -34,7 +34,7 @@ class BookController {
             const addBook = await book.set({
                 title: title,
                 author: author,
-                file: await his.uploadFile(file)
+                file: await this.uploadFile(file)
             })
 
             res.status(200).json({
