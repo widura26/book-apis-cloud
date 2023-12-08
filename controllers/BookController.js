@@ -29,7 +29,7 @@ class BookController {
     createBook = async (req, res) => {
         const { title, author } = req.body;
         const file = req.file.originalname;
-        await this.uploadFile(file);
+        await this.uploadFile(`uploads/${file}`);
         const id = crypto.randomBytes(14).toString('hex')
         try {
             const book = firestore.doc(`/books/${id}`);
