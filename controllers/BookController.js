@@ -40,10 +40,8 @@ class BookController {
         const { title, author } = req.body;
         const uploadFile = req.file;
         const destFileName = uploadFile.originalname;
-
-        await this.uploadFile(uploadFile.size);
-
-        const id = crypto.randomBytes(14).toString('hex')
+        const id = crypto.randomBytes(14).toString('hex');
+        
         try {
             const book = firestore.doc(`/books/${id}`);
             const addBook = await book.set({
@@ -51,6 +49,7 @@ class BookController {
                 author: author,
                 file: `https://storage.googleapis.com/book-apis-bucket/${uploadFile.originalname}`
             })
+            await this.uploadFile(destFileName);
 
             res.status(200).json({
                 message: 'Data berhasil ditambahkan',
