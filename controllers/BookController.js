@@ -22,7 +22,7 @@ class BookController {
 
         try {
             const file = storage.bucket(bucketName).file(destFileName);
-            await new Promise((resolve, reject) => {
+            return new Promise((resolve, reject) => {
                 file.createWriteStream().on('error', (err) => {
                     console.error(`Error uploading file: ${err}`);
                     reject(err);
