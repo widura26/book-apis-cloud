@@ -2,6 +2,8 @@ import Book from '../models/Book.js'
 import crypto from 'crypto';
 import firestore from '../samples/firestoreClient.js';
 import { Storage } from '@google-cloud/storage';
+import path from 'path';
+const keyFilePath = path.resolve(__dirname, '../samples/storage.json')
 
 class BookController {
     getBooks = async (req, res) => {
@@ -17,7 +19,7 @@ class BookController {
     uploadFile = async (destFileName) => {
         const bucketName = 'book-apis-bucket'
         const storage = new Storage({
-            keyFilename: '../samples/storage.json'
+            keyFilename: keyFilePath
         })
 
         try {
