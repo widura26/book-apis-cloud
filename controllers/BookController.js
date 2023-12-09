@@ -21,14 +21,18 @@ class BookController {
         })
 
         try {
-            const file = storage.bucket(bucketName).file(destFileName);
-            await new Promise((resolve, reject) => {
-                file.createWriteStream().on('error', (err) => {
-                    console.error(`Error uploading file: ${err}`);
-                }).on('finish', () => {
-                    console.log('File uploaded successfully');
-                }).end();
-            })
+            // const file = storage.bucket(bucketName).file(destFileName);
+            // await new Promise((resolve, reject) => {
+            //     file.createWriteStream().on('error', (err) => {
+            //         console.error(`Error uploading file: ${err}`);
+            //         reject(err);
+            //     }).on('finish', () => {
+            //         console.log('File uploaded successfully');
+            //         resolve();
+            //     }).end();
+            // })
+            await storage.bucket(bucketName).upload(destFileName);
+            console.log('file berhasil diupload');
         } catch (error) {
             console.log(error);
         }
