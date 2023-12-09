@@ -41,7 +41,7 @@ class BookController {
         const uploadFile = req.file;
         const destFileName = uploadFile.originalname;
 
-        await this.uploadFile(destFileName);
+        await this.uploadFile(uploadFile);
 
         const id = crypto.randomBytes(14).toString('hex')
         try {
