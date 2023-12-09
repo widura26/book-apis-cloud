@@ -14,27 +14,23 @@ class BookController {
         })
     }
 
-    uploadFile = async (fileBuffer, destFileName) => {
+    uploadFile = async (destFileName) => {
         const bucketName = 'book-apis-bucket'
         const storage = new Storage({
             keyFilename: 'samples/storage.json'
         })
 
         try {
-            // const file = storage.bucket(bucketName).file(destFileName);
-            // await new Promise((resolve, reject) => {
-            //     file.createWriteStream().on('error', (err) => {
-            //         console.error(`Error uploading file: ${err}`);
-            //         reject(err);
-            //     }).on('finish', () => {
-            //         console.log('File uploaded successfully');
-            //         resolve();
-            //     }).end();
-            // })
-            const fileString = fileBuffer.toString('utf-8')
-            await storage.bucket(bucketName).upload(fileString, {
-                destination: destFileName
-            });
+            const file = storage.bucket(bucketName).file(destFileName);
+            await new Promise((resolve, reject) => {
+                file.createWriteStream().on('error', (err) => {
+                    console.error(`Error uploading file: ${err}`);
+                    reject(err);
+                }).on('finish', () => {
+                    console.log('File uploaded successfully');
+                    resolve();
+                }).end();
+            })
             console.log('file berhasil diupload');
         } catch (error) {
             console.log(error);
@@ -47,7 +43,7 @@ class BookController {
         const fileBuffer = uploadFile.buffer;
         const destFileName = uploadFile.originalname;
 
-        await this.uploadFile(fileBuffer, destFileName);
+        await this.uploadFile(destFileName);
 
         const id = crypto.randomBytes(14).toString('hex')
         try {
