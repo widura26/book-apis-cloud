@@ -31,7 +31,6 @@ class BookController {
                     // resolve();
                 }).end();
             // })
-            console.log('file berhasil diupload');
         } catch (error) {
             console.log(error);
         }
