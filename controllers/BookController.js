@@ -54,7 +54,7 @@ class BookController {
             const addBook = await book.set({
                 title: title,
                 author: author,
-                file: `https://storage.googleapis.com/book-apis-bucket/${file.originalname}`
+                file: `https://storage.googleapis.com/book-apis-bucket/${uploadFile.originalname}`
             })
 
             res.status(200).json({
