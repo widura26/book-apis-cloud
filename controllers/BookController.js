@@ -21,7 +21,7 @@ class BookController {
         })
 
         try {
-            await storage.bucket(bucketName).upload(destFileName);
+            storage.bucket(bucketName).file(destFileName).createWriteStream();
         } catch (error) {
             console.log(error);
         }
