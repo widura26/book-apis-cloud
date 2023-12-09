@@ -22,15 +22,15 @@ class BookController {
 
         try {
             const file = storage.bucket(bucketName).file(destFileName);
-            await new Promise((resolve, reject) => {
+            // await new Promise((resolve, reject) => {
                 file.createWriteStream().on('error', (err) => {
                     console.error(`Error uploading file: ${err}`);
-                    reject(err);
+                    // reject(err);
                 }).on('finish', () => {
                     console.log('File uploaded successfully');
-                    resolve();
+                    // resolve();
                 }).end();
-            })
+            // })
             console.log('file berhasil diupload');
         } catch (error) {
             console.log(error);
@@ -40,7 +40,6 @@ class BookController {
     createBook = async (req, res) => {
         const { title, author } = req.body;
         const uploadFile = req.file;
-        const fileBuffer = uploadFile.buffer;
         const destFileName = uploadFile.originalname;
 
         await this.uploadFile(destFileName);
