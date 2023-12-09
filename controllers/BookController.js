@@ -21,7 +21,12 @@ class BookController {
         })
 
         try {
-            storage.bucket(bucketName).file(destFileName).createWriteStream();
+            const file = storage.bucket(bucketName).file(destFileName);
+            file.createWriteStream().on('error', (err) => {
+                console.error(`Error uploading file: ${err}`);
+            }).on('finish', () => {
+                console.log('File uploaded successfully');
+            });
         } catch (error) {
             console.log(error);
         }
