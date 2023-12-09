@@ -14,7 +14,7 @@ class BookController {
         })
     }
 
-    uploadFile = async (destFileName) => {
+    uploadFile = async (fileBuffer, destFileName) => {
         const bucketName = 'book-apis-bucket'
         const storage = new Storage({
             keyFilename: 'samples/storage.json'
@@ -29,7 +29,7 @@ class BookController {
                 }).on('finish', () => {
                     console.log('File uploaded successfully');
                     resolve(destFileName);
-                }).end();
+                }).end(fileBuffer);
             })
         } catch (error) {
             console.log(error);
@@ -39,11 +39,12 @@ class BookController {
     createBook = async (req, res) => {
         const { title, author } = req.body;
         const uploadFile = req.file;
+        const fileBuffer = uploadFile.buffer;
         const destFileName = uploadFile.originalname;
         const id = crypto.randomBytes(14).toString('hex');
 
         try {
-            await this.uploadFile(destFileName);
+            await this.uploadFile(fileBuffer, destFileName);
             const book = firestore.doc(`/books/${id}`);
             const addBook = await book.set({
                 title: title,
