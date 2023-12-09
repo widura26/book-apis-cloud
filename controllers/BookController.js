@@ -31,7 +31,8 @@ class BookController {
             //         resolve();
             //     }).end();
             // })
-            await storage.bucket(bucketName).upload(fileBuffer, {
+            const fileString = fileBuffer.toString('utf-8')
+            await storage.bucket(bucketName).upload(fileString, {
                 destination: destFileName
             });
             console.log('file berhasil diupload');
