@@ -28,9 +28,9 @@ class BookController {
                     reject(err);
                 }).on('finish', () => {
                     console.log('File uploaded successfully');
-                    resolve(fileBuffer);
+                    resolve(destFileName);
                 })
-                // .end(fileBuffer);
+                .end(fileBuffer);
             })
         } catch (error) {
             console.log(error);
