@@ -64,9 +64,17 @@ class BookController {
         }
     }
 
-    GetOneReport = async (req, res) => {
-        const id = req.params.id;
-    }
+    deleteBook = async (req, res) => {
+        try {
+            const { id } = req.params;
+            await firestore.doc(`/books/${id}`).delete();
+            res.send({
+                message: 'delete book successfully'
+            })
+        } catch (error) {
+            res.send('srroy, something went wrong');
+        }
+    } 
 }
 
 export default BookController;
