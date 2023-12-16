@@ -36,6 +36,19 @@ class BookController {
             console.log(error);
         }
     }
+
+    deleteFile = async (fileName) => {
+        const bucketName = 'book-apis-bucket';
+        const storage = new Storage({
+            keyFilename: "samples/keyfile.json"
+        });
+        try {
+            await storage.bucket(bucketName).file(fileName).delete();
+            console.log('Delete file successfully');
+        } catch (error) {
+            console.log(error);
+        }
+    }
     
     createBook = async (req, res) => {
         const { title, author } = req.body;
@@ -67,9 +80,11 @@ class BookController {
     deleteBook = async (req, res) => {
         try {
             const { id } = req.params;
-            await firestore.doc(`/books/${id}`).delete();
+            const book = firestore.doc(`/books/${id}`);
+            await book.delete()
+            // await this.deleteFile()
             res.send({
-                message: 'delete book successfully'
+                message: book
             })
         } catch (error) {
             res.send('srroy, something went wrong');
