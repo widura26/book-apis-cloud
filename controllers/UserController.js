@@ -12,7 +12,7 @@ class UserController {
             const addUser = await usersCollection.create({
                 username: username,
                 email: email,
-                password: bcrypt.hashSync(password, 8),
+                password: password,
             })
 
             res.send({
