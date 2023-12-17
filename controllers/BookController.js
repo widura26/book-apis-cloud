@@ -95,11 +95,11 @@ class BookController {
     deleteBook = async (req, res) => {
         try {
             const { id } = req.params;
-            const book = await firestore.doc(`/books/${id}`).get();
+            const book = firestore.doc(`/books/${id}`);
             const bookDelete = book.data()
-            book.delete()
+            await book.delete();
             res.send({
-                message: book.data()
+                message: bookDelete
             })
         } catch (error) {
             res.send('sorry, something went wrong');
