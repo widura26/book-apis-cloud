@@ -97,7 +97,7 @@ class BookController {
             const { id } = req.params;
             const book = await firestore.doc(`/books/${id}`).get();
             const bookDelete = book.data()
-            bookDelete.delete()
+            book.delete()
             res.send({
                 message: book.data()
             })
