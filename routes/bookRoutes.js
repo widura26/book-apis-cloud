@@ -12,5 +12,6 @@ router.get('/allbooks', new BookController().getBooks);
 // router.get('/book/:id', new BookController());
 router.post('/books', upload.single('file'), new BookController().createBook);
 // 'file' yang terdapat di dalam function single itu nama fieldnya
+router.get('/books/:id', new BookController().getOneBook);
 router.delete('/books/:id', new BookController().deleteBook);
 export default router;

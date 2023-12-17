@@ -77,6 +77,21 @@ class BookController {
         }
     }
 
+    getOneBook = async (req, res) => {
+        try {
+            const { id } = req.params;
+            const book = firestore.doc(`/books/${id}`);      
+            res.send({
+                data: book
+            })  
+        } catch (error) {
+            console.log(error)
+            res.send({
+                message: error
+            })
+        }
+    }
+
     deleteBook = async (req, res) => {
         try {
             const { id } = req.params;
