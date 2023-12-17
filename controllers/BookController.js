@@ -95,7 +95,7 @@ class BookController {
     deleteBook = async (req, res) => {
         try {
             const { id } = req.params;
-            const book = firestore.doc(`/books/${id}`).get();
+            const book = await firestore.doc(`/books/${id}`).get();
             // await this.deleteFile()
             res.send({
                 message: book.data()
