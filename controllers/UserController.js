@@ -8,7 +8,7 @@ class UserController {
         
         try {
             const usersCollection = firestore.collection('users').doc(`${id}`);
-            const addUser = await usersCollection.create({
+            const addUser = await usersCollection.set({
                 username: username,
                 email: email,
                 password: password,
