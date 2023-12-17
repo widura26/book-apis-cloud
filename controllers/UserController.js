@@ -1,5 +1,6 @@
 import firestore from '../samples/firestoreClient.js';
 import crypto from 'crypto';
+import bcrypt from 'bcrypt';
 class UserController {
 
     signin = async (req, res) => {
