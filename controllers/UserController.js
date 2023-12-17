@@ -2,12 +2,25 @@ import firestore from '../samples/firestoreClient.js';
 
 class UserController {
 
-    signup = async () => {
-        const usersCollection = firestore.collection('users');
-        const users = await usersCollection.doc()
-    }
+    signup = async (req, res) => {
+        const { username, email, password } = req.body;
+        const id = crypto.randomBytes(14).toString('hex');
 
-    // login = async () => {
-        
-    // }
+        try {
+            const usersCollection = firestore.collection('users').doc(`${id}`);
+            const addUser = await usersCollection.create({
+                username: username,
+                email: email,
+                password: bcrypt.hashSync(password, 8),
+            })
+
+            res.send({
+                message: 'Sign up successfully'
+            })
+        } catch (error) {
+            console.log(error);
+        }
+    }
 }
+
+export default UserController;
