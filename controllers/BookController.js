@@ -44,7 +44,7 @@ class BookController {
         });
         try {
             const url = fileName;
-            const fileNameOri = url.match(/\/([^\/?#]+)\.pdf$/i)[1]; 
+            const fileNameOri = url.split("/")[4]; 
             await storage.bucket(bucketName).file(fileNameOri).delete();
             console.log('Delete file successfully');
         } catch (error) {
