@@ -80,7 +80,7 @@ class BookController {
     getOneBook = async (req, res) => {
         try {
             const { id } = req.params;
-            const book = firestore.doc(`/books/${id}`);      
+            const book = await firestore.doc(`/books/${id}`).get();      
             res.send({
                 data: book
             })  
