@@ -2,7 +2,7 @@ import firestore from '../samples/firestoreClient.js';
 
 class UserController {
 
-    signup = async (req, res) => {
+    signin = async (req, res) => {
         const { username, email, password } = req.body;
         const id = crypto.randomBytes(14).toString('hex');
 
@@ -20,6 +20,10 @@ class UserController {
         } catch (error) {
             console.log(error);
         }
+    }
+
+    login = async (req, res) => {
+        const { email, password } = req.body;
     }
 }
 

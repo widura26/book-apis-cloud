@@ -1,5 +1,6 @@
 import express from 'express';
 import bookRoutes from './routes/bookRoutes.js';
+import userRoutes from './routes/userRoutes.js';
 import bodyParser from 'body-parser';
 const app = express();
 
@@ -8,7 +9,8 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use([
-    bookRoutes
+    bookRoutes,
+    userRoutes
 ]);
 
 app.get('/hello-word', (req, res) => {
