@@ -43,7 +43,9 @@ class BookController {
             keyFilename: "samples/keyfile.json"
         });
         try {
-            await storage.bucket(bucketName).file(fileName).delete();
+            const url = fileName;
+            const fileNameOri = url.match(/\/([^\/?#]+)\.pdf$/i)[1]; 
+            await storage.bucket(bucketName).file(fileNameOri).delete();
             console.log('Delete file successfully');
         } catch (error) {
             console.log(error);
