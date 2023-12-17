@@ -99,7 +99,7 @@ class BookController {
             await book.delete()
             // await this.deleteFile()
             res.send({
-                message: book
+                message: book.data()
             })
         } catch (error) {
             res.send('srroy, something went wrong');
