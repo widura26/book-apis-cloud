@@ -14,8 +14,9 @@ class UserController {
                 password: password,
             })
 
-            res.send({
-                message: 'Sign up successfully'
+            res.status(200).json({
+                message: 'signin successfully',
+                data: addUser
             })
         } catch (error) {
             console.log(error);
