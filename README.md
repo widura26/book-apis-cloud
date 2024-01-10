@@ -1,4 +1,4 @@
-# Book APIs with Cloud environment (Kredit Google Cloud sudah habis)
+# Book APIs with Cloud environment
 
 * Database : Google Cloud Firestore
 * Framework : Express JS
